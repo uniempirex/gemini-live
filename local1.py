@@ -31,15 +31,24 @@ output_stream = audio.open(format=FORMAT,
                            output=True,
                            frames_per_buffer=CHUNK)
 
+# Variable to store the start time for initial response latency calculation
+start_time = None
+
 # WebSocket setup
 ws = None
 
 def on_message(ws, message):
+    global start_time
     try:
         response_data = json.loads(message)
         if "serverContent" in response_data and "modelTurn" in response_data["serverContent"] and "parts" in response_data["serverContent"]["modelTurn"]:
             for part in response_data["serverContent"]["modelTurn"]["parts"]:
                 if "inlineData" in part and "data" in part["inlineData"]:
+                    if start_time is not None:
+                        latency = (time.time() - start_time) * 1000 # Latency in milliseconds
+                        print(f"Initial response latency: {latency:.2f} ms")
+                        start_time = None # Reset after first response
+
                     returned_audio_data = base64.b64decode(part["inlineData"]["data"])
                     if returned_audio_data:
                         output_stream.write(returned_audio_data)
@@ -55,7 +64,9 @@ def on_close(ws, close_status_code, close_msg):
     print("WebSocket Closed")
 
 def on_open(ws):
+    global start_time
     print("WebSocket Opened")
+    start_time = time.time() # Record time when WebSocket is opened
     # Send initial session configuration
     setup_message = {
         "setup": {
@@ -63,7 +74,6 @@ def on_open(ws):
             "generationConfig": {
                 "responseModalities": ["AUDIO"], # Request audio responses
             },
-            # Removed speechConfig as it's not a recognized field in the raw WebSocket setup message
         }
     }
     ws.send(json.dumps(setup_message))
