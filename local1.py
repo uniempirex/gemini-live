@@ -27,31 +27,55 @@ input_stream = audio.open(format=FORMAT,
 # Open output stream (speakers)
 output_stream = audio.open(format=FORMAT,
                            channels=CHANNELS,
-                           rate=RATE,
+                           rate=24000,
                            output=True,
                            frames_per_buffer=CHUNK)
 
 # Variable to store the start time for initial response latency calculation
-start_time = None
+initial_message_sent_time = None
 
 # WebSocket setup
 ws = None
 
 def on_message(ws, message):
-    global start_time
+    global initial_message_sent_time
     try:
         response_data = json.loads(message)
+
+        # Calculate latency for the very first valid JSON response received
+        # after the initial setup message was sent.
+        if initial_message_sent_time is not None:
+            latency = (time.time() - initial_message_sent_time) * 1000 # Latency in milliseconds
+            print(f"Latency (initial setup message sent to first server response): {latency:.2f} ms")
+            initial_message_sent_time = None # Reset after the first response is processed
+
+        # Now process the content of the message
         if "serverContent" in response_data and "modelTurn" in response_data["serverContent"] and "parts" in response_data["serverContent"]["modelTurn"]:
             for part in response_data["serverContent"]["modelTurn"]["parts"]:
                 if "inlineData" in part and "data" in part["inlineData"]:
-                    if start_time is not None:
-                        latency = (time.time() - start_time) * 1000 # Latency in milliseconds
-                        print(f"Initial response latency: {latency:.2f} ms")
-                        start_time = None # Reset after first response
-
                     returned_audio_data = base64.b64decode(part["inlineData"]["data"])
                     if returned_audio_data:
                         output_stream.write(returned_audio_data)
+        elif "setupResponse" in response_data:
+            print(f"Received setup response: {response_data['setupResponse']}")
+        elif "setupComplete" in response_data:
+            print("Received: Setup Complete")
+        elif "serverContent" in response_data:
+            server_content = response_data["serverContent"]
+            if "generationComplete" in server_content and server_content["generationComplete"]:
+                print("Received: Generation Complete")
+            elif "turnComplete" in server_content and server_content["turnComplete"]:
+                print("Received: Turn Complete")
+                if "usageMetadata" in response_data:
+                    usage = response_data["usageMetadata"]
+                    print(f"  Usage: Prompt Tokens: {usage.get('promptTokenCount', 0)}, Response Tokens: {usage.get('responseTokenCount', 0)}, Total Tokens: {usage.get('totalTokenCount', 0)}")
+            elif "interrupted" in server_content and server_content["interrupted"]:
+                print("Received: Interrupted")
+            else:
+                print(f"Received unhandled serverContent: {server_content}")
+        else:
+            print(f"Received unhandled JSON message: {response_data}")
+
     except json.JSONDecodeError:
         print(f"Received non-JSON message: {message}")
     except Exception as e:
@@ -64,16 +88,22 @@ def on_close(ws, close_status_code, close_msg):
     print("WebSocket Closed")
 
 def on_open(ws):
-    global start_time
+    global initial_message_sent_time
     print("WebSocket Opened")
-    start_time = time.time() # Record time when WebSocket is opened
+    initial_message_sent_time = time.time() # Record time when WebSocket is opened (includes sending setup message)
     # Send initial session configuration
     setup_message = {
         "setup": {
-            "model": "models/gemini-2.5-flash-native-audio-latest", # Specify the model
+            "model": "models/gemini-2.5-flash-native-audio-preview-09-2025", # Specify the model
             "generationConfig": {
                 "responseModalities": ["AUDIO"], # Request audio responses
             },
+            # Add system instruction here
+            "systemInstruction": {
+                "parts": [
+                    {"text": "You are a helpful assistant. Respond concisely and always in audio."}
+                ]
+            }
         }
     }
     ws.send(json.dumps(setup_message))
