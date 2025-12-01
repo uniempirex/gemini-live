@@ -34,11 +34,20 @@ output_stream = audio.open(format=FORMAT,
 # Variable to store the start time for initial response latency calculation
 initial_message_sent_time = None
 
+# Variables to store cumulative token counts for the entire session
+total_session_prompt_tokens = 0
+total_session_response_tokens = 0
+
+# Variable to store the start time of the entire session
+session_start_time = time.time()
+
 # WebSocket setup
 ws = None
 
 def on_message(ws, message):
     global initial_message_sent_time
+    global total_session_prompt_tokens
+    global total_session_response_tokens
     try:
         response_data = json.loads(message)
 
@@ -68,7 +77,14 @@ def on_message(ws, message):
                 print("Received: Turn Complete")
                 if "usageMetadata" in response_data:
                     usage = response_data["usageMetadata"]
-                    print(f"  Usage: Prompt Tokens: {usage.get('promptTokenCount', 0)}, Response Tokens: {usage.get('responseTokenCount', 0)}, Total Tokens: {usage.get('totalTokenCount', 0)}")
+                    prompt_tokens = usage.get('promptTokenCount', 0)
+                    response_tokens = usage.get('responseTokenCount', 0)
+                    total_tokens = usage.get('totalTokenCount', 0)
+                    print(f"  Usage: Prompt Tokens: {prompt_tokens}, Response Tokens: {response_tokens}, Total Tokens: {total_tokens}")
+                    
+                    # Accumulate for session totals
+                    total_session_prompt_tokens += prompt_tokens
+                    total_session_response_tokens += response_tokens
             elif "interrupted" in server_content and server_content["interrupted"]:
                 print("Received: Interrupted")
             else:
@@ -101,7 +117,7 @@ def on_open(ws):
             # Add system instruction here
             "systemInstruction": {
                 "parts": [
-                    {"text": "You are a helpful assistant. Respond concisely and always in audio."}
+                    {"text": "You are a mighty legendary philosopher. Use only Indonesian language."}
                 ]
             }
         }
@@ -156,3 +172,14 @@ finally:
     output_stream.close()
     audio.terminate()
     print("Audio streams closed.")
+    
+    # Calculate and display session duration
+    session_end_time = time.time()
+    session_duration = session_end_time - session_start_time
+    print(f"\n--- Session Summary ---")
+    print(f"Session Duration: {session_duration:.2f} seconds")
+    
+    # Display total session token usage
+    print(f"Total Session Prompt Tokens: {total_session_prompt_tokens}")
+    print(f"Total Session Response Tokens: {total_session_response_tokens}")
+    print(f"Total Session Tokens (Prompt + Response): {total_session_prompt_tokens + total_session_response_tokens}")
