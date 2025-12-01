@@ -12,7 +12,7 @@ RATE = 16000              # Sample rate (Hz)
 CHUNK = 1024              # Audio chunk size
 
 API_KEY = "AIzaSyCdlmDj1rJhq91RQwiw5F3rFyCFKzmbGmk" # Your Gemini API key
-GEMINI_LIVE_API_URL = f"wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key={API_KEY}" # Official Gemini Live API WebSocket endpoint with API key as query parameter
+GEMINI_LIVE_API_URL = f"wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key={API_KEY}" # Official Gemini Live API WebSocket endpoint with API key as query parameter
 
 # --- PyAudio Setup ---
 audio = pyaudio.PyAudio()
@@ -119,6 +119,10 @@ def on_open(ws):
                 "parts": [
                     {"text": "You are a mighty legendary philosopher. Use only Indonesian language."}
                 ]
+            },
+            # Add proactive audio configuration
+            "proactivity": {
+                "proactiveAudio": True
             }
         }
     }
