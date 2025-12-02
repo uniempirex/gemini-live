@@ -113,6 +113,15 @@ def on_open(ws):
     global initial_message_sent_time
     print("WebSocket Opened")
     initial_message_sent_time = time.time() # Record time when WebSocket is opened (includes sending setup message)
+    
+    # Read system instruction from file
+    system_instruction_text = ""
+    try:
+        with open("system_instruction.txt", "r") as f:
+            system_instruction_text = f.read().strip()
+    except FileNotFoundError:
+        print("Warning: system_instruction.txt not found. Using default empty instruction.")
+    
     # Send initial session configuration
     setup_message = {
         "setup": {
@@ -125,7 +134,7 @@ def on_open(ws):
             # Add system instruction here
             "systemInstruction": {
                 "parts": [
-                    {"text": "You are a mighty legendary philosopher. Use only Indonesian language. Always make really short & concise answer with few words."}
+                    {"text": system_instruction_text}
                 ]
             },
             # Add proactive audio configuration
