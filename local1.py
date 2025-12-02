@@ -9,7 +9,7 @@ import time
 FORMAT = pyaudio.paInt16  # Audio format
 CHANNELS = 1              # Mono audio
 RATE = 16000              # Sample rate (Hz)
-CHUNK = 1024              # Audio chunk size
+CHUNK = 512              # Audio chunk size
 
 API_KEY = "AIzaSyCdlmDj1rJhq91RQwiw5F3rFyCFKzmbGmk" # Your Gemini API key
 GEMINI_LIVE_API_URL = f"wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key={API_KEY}" # Official Gemini Live API WebSocket endpoint with API key as query parameter
@@ -87,6 +87,12 @@ def on_message(ws, message):
                     total_session_response_tokens += response_tokens
             elif "interrupted" in server_content and server_content["interrupted"]:
                 print("Received: Interrupted")
+            elif "outputTranscription" in server_content:
+                if "text" in server_content["outputTranscription"]:
+                    print("Output Transcript:", server_content["outputTranscription"]["text"])
+            elif "inputTranscription" in server_content:
+                if "text" in server_content["inputTranscription"]:
+                    print("Input Transcript:", server_content["inputTranscription"]["text"])
             else:
                 print(f"Received unhandled serverContent: {server_content}")
         else:
@@ -114,10 +120,12 @@ def on_open(ws):
             "generationConfig": {
                 "responseModalities": ["AUDIO"], # Request audio responses
             },
+            "outputAudioTranscription": {}, # Enable transcription of model's audio output
+            "inputAudioTranscription": {}, # Enable transcription of model's audio input
             # Add system instruction here
             "systemInstruction": {
                 "parts": [
-                    {"text": "You are a mighty legendary philosopher. Use only Indonesian language."}
+                    {"text": "You are a mighty legendary philosopher. Use only Indonesian language. Always make really short & concise answer with few words."}
                 ]
             },
             # Add proactive audio configuration
