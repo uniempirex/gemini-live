@@ -50,6 +50,7 @@ Start talking to Gemini
 import asyncio
 import sys
 import traceback
+import os  # Import the os module
 
 import pyaudio
 
@@ -70,6 +71,8 @@ CHUNK_SIZE = 1024
 
 pya = pyaudio.PyAudio()
 
+# Set your API key here directly in the script
+os.environ["GEMINI_API_KEY"] = "AIzaSyCdlmDj1rJhq91RQwiw5F3rFyCFKzmbGmk"  # Replace with your actual API key
 
 client = genai.Client(http_options={"api_version": "v1alpha"})  # GEMINI_API_KEY must be set as env variable
 
