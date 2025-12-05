@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Live WebRTC Demo</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        button { font-size: 1.2em; padding: 10px 20px; margin: 5px; }
+        #status { margin-top: 20px; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Gemini Live WebRTC Demo</h1>
+    <p>Enter your API key and click Start to begin.</p>
+    <input type="text" id="apiKey" placeholder="Enter your Gemini API Key" size="60">
+    <br>
+    <button id="startButton">Start</button>
+    <button id="stopButton" disabled>Stop</button>
+    <div id="status"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
