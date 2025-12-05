@@ -334,6 +334,7 @@ class NoUIDemo:
             elif event.type == "audio_end":
                 print("Audio ended")
             elif event.type == "audio":
+                print(f"Received audio event: item_id={event.item_id}, content_index={event.content_index}, audio_data_length={len(event.audio.data)}")
                 # Enqueue audio for callback-based playback with metadata
                 np_audio = np.frombuffer(event.audio.data, dtype=np.int16)
                 # Non-blocking put; queue is unbounded, so drops won’t occur.
