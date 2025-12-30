@@ -11,7 +11,7 @@ CHANNELS = 1              # Mono audio
 RATE = 16000              # Sample rate (Hz)
 CHUNK = 512              # Audio chunk size
 
-API_KEY = "AIzaSyCdlmDj1rJhq91RQwiw5F3rFyCFKzmbGmk" # Your Gemini API key
+API_KEY = "AIzaSyBMfD2Hu3bSK9yMi1tctitHSyNqErV50U0" # Your Gemini API key
 GEMINI_LIVE_API_URL = f"wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key={API_KEY}" # Official Gemini Live API WebSocket endpoint with API key as query parameter
 
 # --- PyAudio Setup ---

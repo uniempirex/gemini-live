@@ -28,13 +28,13 @@ import google.auth
 import pydantic
 from websockets import ConnectionClosed
 
-from . import _api_module
-from . import _common
-from . import _live_converters as live_converters
-from . import _mcp_utils
-from . import _transformers as t
-from . import errors
-from . import types
+from .. import _api_module
+from .. import _common
+from .. import _live_converters as live_converters
+from .. import _mcp_utils
+from .. import _transformers as t
+from .. import errors
+from .. import types
 from ._api_client import BaseApiClient
 from ._common import get_value_by_path as getv
 from ._common import set_value_by_path as setv

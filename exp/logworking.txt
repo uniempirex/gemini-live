@@ -1,0 +1,279 @@
+05:31:49.132642 ens4  Out IP (tos 0x0, ttl 64, id 63553, offset 0, flags [DF], proto UDP (17), length 479)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 451
+        OPTIONS sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPj2dfd66cd-9022-4e93-b058-3ad24a131e2f
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=7c9d02f7-9a47-4ca2-9e74-572b4590b86f
+        To: <sip:sip1.solusipbx.com>
+        Contact: <sip:+622131147013@34.101.144.235:5060>
+        Call-ID: 77118422-4bf4-478c-9c86-93b29823b725
+        CSeq: 52258 OPTIONS
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Content-Length:  0
+
+05:31:49.148885 ens4  In  IP (tos 0x0, ttl 59, id 17466, offset 0, flags [none], proto UDP (17), length 790)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 762
+        SIP/2.0 200 OK
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPj2dfd66cd-9022-4e93-b058-3ad24a131e2f
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=7c9d02f7-9a47-4ca2-9e74-572b4590b86f
+        To: <sip:sip1.solusipbx.com>;tag=era3ZB229vSeg
+        Call-ID: 77118422-4bf4-478c-9c86-93b29823b725
+        CSeq: 52258 OPTIONS
+        Contact: <sip:114.5.48.19:2055>
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Accept: application/sdp
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        Allow-Events: talk, hold, conference, presence, as-feature-event, dialog, line-seize, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
+05:35:17.631159 ens4  Out IP (tos 0x0, ttl 64, id 24228, offset 0, flags [DF], proto UDP (17), length 479)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 451
+        OPTIONS sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPj1acc0439-6ce0-4595-95d5-9d8df9362927
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=aaefa5f0-d84d-45f0-a6b8-675c022e7a71
+        To: <sip:sip1.solusipbx.com>
+        Contact: <sip:+622131147013@34.101.144.235:5060>
+        Call-ID: ffea5dd9-1b3e-48c9-9903-aaeea21af5e2
+        CSeq: 39364 OPTIONS
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Content-Length:  0
+
+05:35:17.647639 ens4  In  IP (tos 0x0, ttl 59, id 42831, offset 0, flags [none], proto UDP (17), length 790)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 762
+        SIP/2.0 200 OK
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPj1acc0439-6ce0-4595-95d5-9d8df9362927
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=aaefa5f0-d84d-45f0-a6b8-675c022e7a71
+        To: <sip:sip1.solusipbx.com>;tag=8a4HmSg5tD46j
+        Call-ID: ffea5dd9-1b3e-48c9-9903-aaeea21af5e2
+        CSeq: 39364 OPTIONS
+        Contact: <sip:114.5.48.19:2055>
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Accept: application/sdp
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        Allow-Events: talk, hold, conference, presence, as-feature-event, dialog, line-seize, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
+    05:26:47.628721 ens4  Out IP (tos 0x0, ttl 64, id 16084, offset 0, flags [DF], proto UDP (17), length 902)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 874
+        REGISTER sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPj88afd8e0-3816-4197-b34d-adf6d36c75ba
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=b12c3ae3-4260-46bd-a287-c197c4a39521
+        To: <sip:+622131147013@sip1.solusipbx.com>
+        Call-ID: eb6f5121-9147-40c1-a6d0-17abc27a46f4
+        CSeq: 5647 REGISTER
+        Contact: <sip:solusi@34.101.144.235:5060>
+        Expires: 3600
+        Allow: OPTIONS, REGISTER, SUBSCRIBE, NOTIFY, PUBLISH, INVITE, ACK, BYE, CANCEL, UPDATE, PRACK, MESSAGE, INFO, REFER
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Authorization: Digest username="+622131147013", realm="sip1.solusipbx.com", nonce="c31629ff-459f-420d-97e4-c1a4d0d51d98", uri="sip:sip1.solusipbx.com:2055", response="85d6a0e486c28ac85748b5a016a61eb3", algorithm=MD5, cnonce="985b43f1c9bf404296f8aab0c5d2305f", qop=auth, nc=00000001
+        Content-Length:  0
+
+05:26:47.647817 ens4  In  IP (tos 0x0, ttl 59, id 3299, offset 0, flags [none], proto UDP (17), length 668)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 640
+        SIP/2.0 200 OK
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPj88afd8e0-3816-4197-b34d-adf6d36c75ba
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=b12c3ae3-4260-46bd-a287-c197c4a39521
+        To: <sip:+622131147013@sip1.solusipbx.com>;tag=7cD69r7ZK1j0e
+        Call-ID: eb6f5121-9147-40c1-a6d0-17abc27a46f4
+        CSeq: 5647 REGISTER
+        Contact: <sip:solusi@34.101.144.235:5060>;expires=3600
+        Date: Thu, 11 Dec 2025 05:27:08 GMT
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
+06:03:35.562780 ens4  Out IP (tos 0x0, ttl 64, id 13046, offset 0, flags [DF], proto UDP (17), length 619)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 591
+        REGISTER sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPj41f09e0a-c50b-4d52-a82b-23a537590fda
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=694cbf40-f042-45fc-8e58-b0c7407566ba
+        To: <sip:+622131147013@sip1.solusipbx.com>
+        Call-ID: 875734cf-6bd6-44d4-a576-cb9e92d1d65a
+        CSeq: 3751 REGISTER
+        Contact: <sip:solusi@34.101.144.235:5060>
+        Expires: 3600
+        Allow: OPTIONS, REGISTER, SUBSCRIBE, NOTIFY, PUBLISH, INVITE, ACK, BYE, CANCEL, UPDATE, PRACK, MESSAGE, INFO, REFER
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Content-Length:  0
+
+06:03:35.581917 ens4  In  IP (tos 0x0, ttl 59, id 3994, offset 0, flags [none], proto UDP (17), length 711)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 683
+        SIP/2.0 401 Unauthorized
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPj41f09e0a-c50b-4d52-a82b-23a537590fda
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=694cbf40-f042-45fc-8e58-b0c7407566ba
+        To: <sip:+622131147013@sip1.solusipbx.com>;tag=N8pg4r7FKH7XB
+        Call-ID: 875734cf-6bd6-44d4-a576-cb9e92d1d65a
+        CSeq: 3751 REGISTER
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        WWW-Authenticate: Digest realm="sip1.solusipbx.com", nonce="54a4a98d-817d-495a-953e-479dc7b5db42", algorithm=MD5, qop="auth"
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
+06:03:35.583094 ens4  Out IP (tos 0x0, ttl 64, id 13049, offset 0, flags [DF], proto UDP (17), length 902)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 874
+        REGISTER sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPj23af3c8a-9a4d-4928-83e9-ff9c9e663166
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=694cbf40-f042-45fc-8e58-b0c7407566ba
+        To: <sip:+622131147013@sip1.solusipbx.com>
+        Call-ID: 875734cf-6bd6-44d4-a576-cb9e92d1d65a
+        CSeq: 3752 REGISTER
+        Contact: <sip:solusi@34.101.144.235:5060>
+        Expires: 3600
+        Allow: OPTIONS, REGISTER, SUBSCRIBE, NOTIFY, PUBLISH, INVITE, ACK, BYE, CANCEL, UPDATE, PRACK, MESSAGE, INFO, REFER
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Authorization: Digest username="+622131147013", realm="sip1.solusipbx.com", nonce="54a4a98d-817d-495a-953e-479dc7b5db42", uri="sip:sip1.solusipbx.com:2055", response="d233cd6b1b4e08bc938ecc7516d91172", algorithm=MD5, cnonce="0a7165d352724f1593c668d9707a07ca", qop=auth, nc=00000001
+        Content-Length:  0
+
+06:03:35.603551 ens4  In  IP (tos 0x0, ttl 59, id 4004, offset 0, flags [none], proto UDP (17), length 668)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 640
+        SIP/2.0 200 OK
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPj23af3c8a-9a4d-4928-83e9-ff9c9e663166
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=694cbf40-f042-45fc-8e58-b0c7407566ba
+        To: <sip:+622131147013@sip1.solusipbx.com>;tag=pHg95KrKgtXgQ
+        Call-ID: 875734cf-6bd6-44d4-a576-cb9e92d1d65a
+        CSeq: 3752 REGISTER
+        Contact: <sip:solusi@34.101.144.235:5060>;expires=3600
+        Date: Thu, 11 Dec 2025 06:03:56 GMT
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
+06:24:05.089614 ens4  Out IP (tos 0x0, ttl 64, id 30303, offset 0, flags [DF], proto UDP (17), length 479)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 451
+        OPTIONS sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPj6a8dd0d0-c17f-4d53-9cf2-1caf86f4b5d5
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=fdef0e08-d368-4a8f-8ea8-e74a3d529693
+        To: <sip:sip1.solusipbx.com>
+        Contact: <sip:+622131147013@34.101.144.235:5060>
+        Call-ID: dd5e9971-7d05-4696-98d0-b21287ce7cb1
+        CSeq: 22982 OPTIONS
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Content-Length:  0
+
+06:24:05.105924 ens4  In  IP (tos 0x0, ttl 59, id 368, offset 0, flags [none], proto UDP (17), length 790)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 762
+        SIP/2.0 200 OK
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPj24273a92-4d34-4f24-96e6-fc423524b9e3
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=49c0ccdf-06d8-4c61-b6e4-a14d4fca9b6b
+        To: <sip:sip1.solusipbx.com>;tag=3ZUc2rS1K9tSQ
+        Call-ID: e2ce6194-8fd3-4f69-bd41-da6d15b90b1c
+        CSeq: 16367 OPTIONS
+        Contact: <sip:114.5.48.19:2055>
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Accept: application/sdp
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        Allow-Events: talk, hold, conference, presence, as-feature-event, dialog, line-seize, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
+
+06:25:27.589232 ens4  Out IP (tos 0x0, ttl 64, id 40053, offset 0, flags [DF], proto UDP (17), length 479)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 451
+        OPTIONS sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPj8ebf66ab-6e43-41f1-912c-6412943e4f38
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=0eedf9bd-998d-4864-a247-29778054aa7b
+        To: <sip:sip1.solusipbx.com>
+        Contact: <sip:+622131147013@34.101.144.235:5060>
+        Call-ID: 2bc3a797-8404-4874-9bf0-86d217b8194c
+        CSeq: 59140 OPTIONS
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Content-Length:  0
+
+06:25:27.605540 ens4  In  IP (tos 0x0, ttl 59, id 36218, offset 0, flags [none], proto UDP (17), length 790)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 762
+        SIP/2.0 200 OK
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPj8ebf66ab-6e43-41f1-912c-6412943e4f38
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=0eedf9bd-998d-4864-a247-29778054aa7b
+        To: <sip:sip1.solusipbx.com>;tag=5Nj38N7BvFBrS
+        Call-ID: 2bc3a797-8404-4874-9bf0-86d217b8194c
+        CSeq: 59140 OPTIONS
+        Contact: <sip:114.5.48.19:2055>
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Accept: application/sdp
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        Allow-Events: talk, hold, conference, presence, as-feature-event, dialog, line-seize, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
+06:29:35.088913 ens4  Out IP (tos 0x0, ttl 64, id 4923, offset 0, flags [DF], proto UDP (17), length 479)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 451
+        OPTIONS sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPjbbf14246-c25c-4134-8b04-45b762ffa3dc
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=23accf5f-5758-4001-bd5d-b835f9641053
+        To: <sip:sip1.solusipbx.com>
+        Contact: <sip:+622131147013@34.101.144.235:5060>
+        Call-ID: 1d70f3f4-5a5f-4a08-acf8-87e562e860a2
+        CSeq: 52880 OPTIONS
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Content-Length:  0
+
+06:29:35.090063 ens4  Out IP (tos 0x0, ttl 64, id 4924, offset 0, flags [DF], proto UDP (17), length 479)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 451
+        OPTIONS sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPjd2dc0eff-a9c5-4c8d-804a-0d5d2624cbf0
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=85bec251-4c81-4f8a-99ae-2e319fea98e0
+        To: <sip:sip1.solusipbx.com>
+        Contact: <sip:+622131147013@34.101.144.235:5060>
+        Call-ID: 3a076a9e-194b-449c-88eb-f5e2431bc90e
+        CSeq: 65167 OPTIONS
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Content-Length:  0
+
+06:29:35.106558 ens4  In  IP (tos 0x0, ttl 59, id 39014, offset 0, flags [none], proto UDP (17), length 790)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 762
+        SIP/2.0 200 OK
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPjd2dc0eff-a9c5-4c8d-804a-0d5d2624cbf0
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=85bec251-4c81-4f8a-99ae-2e319fea98e0
+        To: <sip:sip1.solusipbx.com>;tag=527BBD7699ySc
+        Call-ID: 3a076a9e-194b-449c-88eb-f5e2431bc90e
+        CSeq: 65167 OPTIONS
+        Contact: <sip:114.5.48.19:2055>
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Accept: application/sdp
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        Allow-Events: talk, hold, conference, presence, as-feature-event, dialog, line-seize, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
+06:32:28.089084 ens4  Out IP (tos 0x0, ttl 64, id 25120, offset 0, flags [DF], proto UDP (17), length 478)
+    10.184.0.2.5060 > 114.5.48.19.2055: SIP, length: 450
+        OPTIONS sip:sip1.solusipbx.com:2055 SIP/2.0
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport;branch=z9hG4bKPj3878253a-e94b-431d-940d-d3ec4f7a3415
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=90fcbf37-f8a6-4f9a-b2d8-fc541a25841d
+        To: <sip:sip1.solusipbx.com>
+        Contact: <sip:+622131147013@34.101.144.235:5060>
+        Call-ID: e382a792-0cb1-4a16-8b81-f2af6cd29990
+        CSeq: 4921 OPTIONS
+        Max-Forwards: 70
+        User-Agent: Asterisk PBX 20.16.0
+        Content-Length:  0
+
+06:32:28.105598 ens4  In  IP (tos 0x0, ttl 59, id 32750, offset 0, flags [none], proto UDP (17), length 789)
+    114.5.48.19.2055 > 10.184.0.2.5060: SIP, length: 761
+        SIP/2.0 200 OK
+        Via: SIP/2.0/UDP 34.101.144.235:5060;rport=5060;branch=z9hG4bKPj3878253a-e94b-431d-940d-d3ec4f7a3415
+        From: <sip:+622131147013@sip1.solusipbx.com>;tag=90fcbf37-f8a6-4f9a-b2d8-fc541a25841d
+        To: <sip:sip1.solusipbx.com>;tag=F6N7UB31c9DXr
+        Call-ID: e382a792-0cb1-4a16-8b81-f2af6cd29990
+        CSeq: 4921 OPTIONS
+        Contact: <sip:114.5.48.19:2055>
+        User-Agent: FreeSWITCH-mod_sofia/1.6.20~64bit
+        Accept: application/sdp
+        Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY, PUBLISH, SUBSCRIBE
+        Supported: timer, path, replaces
+        Allow-Events: talk, hold, conference, presence, as-feature-event, dialog, line-seize, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+        Content-Length: 0
+XXXXXXXXXXXXXXXXXXXXX
