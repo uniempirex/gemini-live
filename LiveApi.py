@@ -18,7 +18,8 @@ CHUNK_SIZE = 256
 pya = pyaudio.PyAudio()
 
 # Set your API key here directly in the script
-os.environ["GEMINI_API_KEY"] = "AIzaSyCdlmDj1rJhq91RQwiw5F3rFyCFKzmbGmk"  # Replace with your actual API key
+os.environ["GEMINI_API_KEY"] = "AIzaSyBMfD2Hu3bSK9yMi1tctitHSyNqErV50U0"  # Replace with your actual API key
+print(f"GEMINI_API_KEY loaded: {bool(os.environ.get('GEMINI_API_KEY'))}")
 
 client = genai.Client(http_options={"api_version": "v1alpha"})  # GEMINI_API_KEY must be set as env variable
 
@@ -26,7 +27,7 @@ client = genai.Client(http_options={"api_version": "v1alpha"})  # GEMINI_API_KEY
 with open("system_instruction.txt", "r") as f:
     system_instruction = f.read()
 
-MODEL = "gemini-2.5-flash-native-audio-preview-09-2025"
+MODEL = "gemini-2.5-flash-native-audio-preview-12-2025"
 CONFIG = {
     "system_instruction": system_instruction,
     "response_modalities": ["AUDIO"],
@@ -34,13 +35,13 @@ CONFIG = {
         "automatic_activity_detection": {
             "disabled": False, # default
             "start_of_speech_sensitivity": "START_SENSITIVITY_HIGH",
-            "end_of_speech_sensitivity": "END_SENSITIVITY_LOW",
+            "end_of_speech_sensitivity": "END_SENSITIVITY_HIGH",
             "prefix_padding_ms": 20,
             "silence_duration_ms": 10 }},
     "speech_config": {
-        "voice_config": {"prebuilt_voice_config": {"voice_name": "Charon"}}},
+        "voice_config": {"prebuilt_voice_config": {"voice_name": "erinome"}}},
     "enable_affective_dialog": False,
-    "proactivity": {'proactive_audio': False},
+    "proactivity": {'proactive_audio': True},
     "output_audio_transcription": {},
     "input_audio_transcription": {},
 }
@@ -59,6 +60,7 @@ class AudioLoop:
         self.total_session_prompt_tokens = 0
         self.total_session_response_tokens = 0
         self.session_start_time = None
+        self._server_content_printed = False # Initialize the flag
 
     async def listen_audio(self):
         mic_info = pya.get_default_input_device_info()
@@ -94,11 +96,37 @@ class AudioLoop:
                     continue
                 
                 if hasattr(response, 'server_content'):
+                    # Print Server Content Details only if there's relevant content
+                    if any(hasattr(response.server_content, attr) and getattr(response.server_content, attr) is not None
+                           for attr in ['model_turn', 'output_transcription', 'input_transcription']):
+                        if not self._server_content_printed: # Only print if not already printed for this turn
+                            print("\n--- Server Content Details ---")
+                            pydantic_internal_attrs = ['_abc_impl', 'model_computed_fields', 'model_config', 'model_extra', 'model_fields', 'model_fields_set']
+                            for attr_name in dir(response.server_content):
+                                if not attr_name.startswith('__') and attr_name not in pydantic_internal_attrs:
+                                    attr_value = getattr(response.server_content, attr_name)
+                                    if attr_name not in ['model_turn', 'output_transcription', 'input_transcription', 'generation_complete', 'interrupted'] and not callable(attr_value):
+                                        print(f"  Server Content - {attr_name}: {attr_value}")
+                            self._server_content_printed = True # Set the flag to True after printing
+
                     if hasattr(response.server_content, 'model_turn') and response.server_content.model_turn:
+                        print("\n--- Model Turn Details ---")
+                        for attr_name in dir(response.server_content.model_turn):
+                            if not attr_name.startswith('__') and attr_name != 'parts' and attr_name not in pydantic_internal_attrs and not callable(getattr(response.server_content.model_turn, attr_name)):
+                                print(f"  Model Turn - {attr_name}: {getattr(response.server_content.model_turn, attr_name)}")
+
                         # The model_turn contains the actual text response from the model
-                        for part in response.server_content.model_turn.parts:
-                            if hasattr(part, 'text') and part.text:
-                                print("Output Transcript:", part.text)
+                        for i, part in enumerate(response.server_content.model_turn.parts):
+                            print(f"\n--- Model Turn Part {i+1} Details ---")
+                            for attr_name in dir(part):
+                                if not attr_name.startswith('__') and attr_name not in pydantic_internal_attrs:
+                                    attr_value = getattr(part, attr_name)
+                                    if attr_name not in ['text', 'thought'] and not callable(attr_value):
+                                        print(f"  Part {i+1} - {attr_name}: {attr_value}")
+                                    elif attr_name == 'text' and attr_value:
+                                        print("Output Transcript:", attr_value)
+                                    elif attr_name == 'thought' and attr_value:
+                                        print("Model Thought:", attr_value)
 
                     if hasattr(response.server_content, 'output_transcription') and response.server_content.output_transcription:
                         print("Output Transcription:", response.server_content.output_transcription.text)
@@ -115,15 +143,16 @@ class AudioLoop:
                 # The server will periodically send messages that include UsageMetadata.
                 if hasattr(response, 'usage_metadata') and (usage := response.usage_metadata):
                     # print("UsageMetadata object attributes:", dir(usage))
-                    prompt_tokens = usage.prompt_token_count
-                    response_tokens = usage.response_token_count # Use response_token_count
-                    total_tokens = usage.total_token_count
+                    prompt_tokens = usage.prompt_token_count if usage.prompt_token_count is not None else 0
+                    response_tokens = usage.response_token_count if usage.response_token_count is not None else 0 # Use response_token_count
+                    total_tokens = usage.total_token_count if usage.total_token_count is not None else 0
                     print(f"  Usage: Prompt Tokens: {prompt_tokens}, Response Tokens: {response_tokens}, Total Tokens: {total_tokens}")
-                    print(f"Used {usage.total_token_count} tokens in total. Response token breakdown:")
-                    for detail in usage.response_tokens_details:
-                        match detail:
-                            case genai.types.ModalityTokenCount(modality=modality, token_count=count):
-                                print(f"{modality}: {count}")
+                    print(f"Used {total_tokens} tokens in total. Response token breakdown:")
+                    if usage.response_tokens_details: # Added check for None
+                        for detail in usage.response_tokens_details:
+                            match detail:
+                                case genai.types.ModalityTokenCount(modality=modality, token_count=count):
+                                    print(f"{modality}: {count}")
                     
                     # Accumulate for session totals
                     self.total_session_prompt_tokens += prompt_tokens
@@ -131,17 +160,7 @@ class AudioLoop:
 
             # After the turn is over
             print("\nReceived: Turn Complete")
-            # ...existing code...
-            # The token counting logic has been moved inside the async for response in turn: loop
-            # if hasattr(turn, 'usage_metadata') and (usage := turn.usage_metadata):
-            #     prompt_tokens = usage.prompt_token_count
-            #     response_tokens = usage.candidates_token_count
-            #     total_tokens = usage.total_token_count
-            #     print(f"  Usage: Prompt Tokens: {prompt_tokens}, Response Tokens: {response_tokens}, Total Tokens: {total_tokens}")
-                
-            #     # Accumulate for session totals
-            #     self.total_session_prompt_tokens += prompt_tokens
-            #     self.total_session_response_tokens += response_tokens
+            self._server_content_printed = False # Reset the flag for the next turn
 
             # If you interrupt the model, it sends a turn_complete.
             # For interruptions to work, we need to stop playback.
@@ -189,7 +208,7 @@ class AudioLoop:
                 tg.create_task(self.play_audio())
         except asyncio.CancelledError:
             pass
-        except asyncio.ExceptionGroup as eg:
+        except ExceptionGroup as eg: # Changed asyncio.ExceptionGroup to ExceptionGroup
             if self.audio_stream:
                 self.audio_stream.close()
             print(f"WebSocket Error: {eg}")
