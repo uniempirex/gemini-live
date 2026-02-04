@@ -17,8 +17,7 @@ CHUNK_SIZE = 256
 
 pya = pyaudio.PyAudio()
 
-# Set your API key here directly in the script
-os.environ["GEMINI_API_KEY"] = "AIzaSyBMfD2Hu3bSK9yMi1tctitHSyNqErV50U0"  # Replace with your actual API key
+# GEMINI_API_KEY must be set as env variable
 print(f"GEMINI_API_KEY loaded: {bool(os.environ.get('GEMINI_API_KEY'))}")
 
 client = genai.Client(http_options={"api_version": "v1alpha"})  # GEMINI_API_KEY must be set as env variable

@@ -16,7 +16,7 @@ CHUNK = 512 # Keep this small for low latency
 # If not set, you must hardcode or load it like: api_key="YOUR_API_KEY"
 client = genai.Client(
     http_options={"api_version": "v1beta"},
-    api_key="AIzaSyCdlmDj1rJhq91RQwiw5F3rFyCFKzmbGmk", # Added os import and lookup
+    api_key=os.getenv("GEMINI_API_KEY"), # Added os import and lookup
 )
 
 # System instruction should be loaded here (from system_instruction.txt)

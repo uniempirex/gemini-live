@@ -4,6 +4,7 @@ import threading
 import json
 import base64
 import time
+import os
 
 # --- Configuration ---
 FORMAT = pyaudio.paInt16  # Audio format
@@ -11,7 +12,7 @@ CHANNELS = 1              # Mono audio
 RATE = 16000              # Sample rate (Hz)
 CHUNK = 512              # Audio chunk size
 
-API_KEY = "AIzaSyBMfD2Hu3bSK9yMi1tctitHSyNqErV50U0" # Your Gemini API key
+API_KEY = os.getenv("GEMINI_API_KEY") # Your Gemini API key environment variable
 GEMINI_LIVE_API_URL = f"wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key={API_KEY}" # Official Gemini Live API WebSocket endpoint with API key as query parameter
 
 # --- PyAudio Setup ---

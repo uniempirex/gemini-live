@@ -1,4 +1,6 @@
 import asyncio
+import os
+
 
 from openai import AsyncOpenAI
 
@@ -17,7 +19,7 @@ async def main() -> None:
     Enter "q" to quit the conversation.
     """
 
-    client = AsyncOpenAI(api_key="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")
+    client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     async with client.realtime.connect(
         model="gpt-realtime",
     ) as connection:
